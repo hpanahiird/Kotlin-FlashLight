@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -95,7 +96,7 @@ class MainActivity : AppCompatActivity() {
             camera!!.startPreview()
             isON = true
             btn_power_switch.text = getString(R.string.switch_off)
-            Glide.with(this).load(ContextCompat.getDrawable(this,R.drawable.flashlighton)).into(img_flashlight)
+            Glide.with(this).load(ContextCompat.getDrawable(this,R.drawable.flashlighton)).apply(RequestOptions().placeholder(img_flashlight.drawable)).into(img_flashlight)
         }
     }
 
@@ -106,7 +107,7 @@ class MainActivity : AppCompatActivity() {
             camera!!.stopPreview()
             isON = false
             btn_power_switch.text = getString(R.string.switch_on)
-            Glide.with(this).load(ContextCompat.getDrawable(this,R.drawable.flashlightoff)).into(img_flashlight)
+            Glide.with(this).load(ContextCompat.getDrawable(this,R.drawable.flashlightoff)).apply(RequestOptions().placeholder(img_flashlight.drawable)).into(img_flashlight)
         }
     }
 
