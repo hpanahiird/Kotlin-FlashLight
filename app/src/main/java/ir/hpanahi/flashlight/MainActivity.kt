@@ -12,6 +12,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
     private val REQUEST_CODE_CAMERA_PERMISSION = 10
@@ -40,21 +41,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkForFlash(): Boolean {
-        if (applicationContext.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
-            return true
+        return if (applicationContext.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
+            true
         } else {
             Toast.makeText(this, "Your camera has not any flash", Toast.LENGTH_SHORT).show()
-            return false
+            false
         }
     }
 
     private fun setupPermission() {
-        val permission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            checkSelfPermission(Manifest.permission.CAMERA)
+        val permission:Int
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            permission = checkSelfPermission(Manifest.permission.CAMERA)
         } else {
-            PackageManager.PERMISSION_GRANTED
+            permission = PackageManager.PERMISSION_GRANTED
             hasPermission = true
-            TODO("VERSION.SDK_INT < M")
+//            TODO("VERSION.SDK_INT < M")
         }
 
         Log.d("permissions", "$permission")
@@ -104,12 +106,41 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
+    private fun setViews() {
+        btn_power_switch.text = getString(R.string.switch_on)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
         if (camera != null) {
             camera!!.release()
             camera = null
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("fkmkmfgj","fgfg")
+        if (!isCameraEnabled()){
+            Log.d("fkmkmfgj","fgfg")
+            setViews()
+            isON =false
+            setupPermission()
+        }
+    }
+
+    private fun isCameraEnabled(): Boolean {
+//        var camera: Camera? = null
+        try {
+//            camera = Camera.open()
+            camera!!.parameters
+        } catch (e: RuntimeException) {
+            e.printStackTrace()
+            return false
+        } finally {
+//            if (camera != null) camera!!.release()
+        }
+        return true
     }
 
 }
