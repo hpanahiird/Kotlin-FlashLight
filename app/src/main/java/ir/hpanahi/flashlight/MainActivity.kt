@@ -28,22 +28,22 @@ class MainActivity : AppCompatActivity() {
         if (hasFlash) {
             setupPermission()
             btn_power_switch.setOnClickListener({
-                Log.d("nvjfnf","lkfmgnf")
+                Log.d("nvjfnf", "lkfmgnf")
                 if (isON)
                     turnOfFlashlight()
                 else
                     turnOnFlashlight()
             })
-        }else{
+        } else {
 
         }
     }
 
-    private fun checkForFlash():Boolean{
-        if (applicationContext.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)){
+    private fun checkForFlash(): Boolean {
+        if (applicationContext.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)) {
             return true
-        }else{
-            Toast.makeText(this,"Your camera has not any flash",Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Your camera has not any flash", Toast.LENGTH_SHORT).show()
             return false
         }
     }
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 requestPermissions(permissions, REQUEST_CODE_CAMERA_PERMISSION)
             }
-        }else{
+        } else {
             camera = Camera.open()
             parameters = camera!!.parameters
         }
@@ -71,9 +71,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when(requestCode){
-            REQUEST_CODE_CAMERA_PERMISSION ->{
-                if (grantResults.isNotEmpty() &&grantResults[0]==PackageManager.PERMISSION_GRANTED){
+        when (requestCode) {
+            REQUEST_CODE_CAMERA_PERMISSION -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     camera = Camera.open()
                     parameters = camera!!.parameters
                     hasPermission = true
@@ -83,26 +83,30 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun turnOnFlashlight() {
-        parameters!!.flashMode= Camera.Parameters.FLASH_MODE_TORCH
-        val mDummy = SurfaceTexture(1) // any int argument will do
-        camera!!.setPreviewTexture(mDummy)
-        camera!!.parameters = parameters
-        camera!!.startPreview()
-        isON = true
-        btn_power_switch.text = getString(R.string.switch_off)
+        if (camera!=null) {
+            parameters!!.flashMode = Camera.Parameters.FLASH_MODE_TORCH
+            val mDummy = SurfaceTexture(1) // any int argument will do
+            camera!!.setPreviewTexture(mDummy)
+            camera!!.parameters = parameters
+            camera!!.startPreview()
+            isON = true
+            btn_power_switch.text = getString(R.string.switch_off)
+        }
     }
 
     private fun turnOfFlashlight() {
-        parameters!!.flashMode= Camera.Parameters.FLASH_MODE_OFF
-        camera!!.parameters = parameters
-        camera!!.stopPreview()
-        isON = false
-        btn_power_switch.text = getString(R.string.switch_on)
+        if (camera != null) {
+            parameters!!.flashMode = Camera.Parameters.FLASH_MODE_OFF
+            camera!!.parameters = parameters
+            camera!!.stopPreview()
+            isON = false
+            btn_power_switch.text = getString(R.string.switch_on)
+        }
     }
 
     override fun onStop() {
         super.onStop()
-        if (camera!=null){
+        if (camera != null) {
             camera!!.release()
             camera = null
         }
