@@ -6,9 +6,11 @@ import android.graphics.SurfaceTexture
 import android.hardware.Camera
 import android.os.Build
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -93,6 +95,7 @@ class MainActivity : AppCompatActivity() {
             camera!!.startPreview()
             isON = true
             btn_power_switch.text = getString(R.string.switch_off)
+            Glide.with(this).load(ContextCompat.getDrawable(this,R.drawable.flashlighton)).into(img_flashlight)
         }
     }
 
@@ -103,6 +106,7 @@ class MainActivity : AppCompatActivity() {
             camera!!.stopPreview()
             isON = false
             btn_power_switch.text = getString(R.string.switch_on)
+            Glide.with(this).load(ContextCompat.getDrawable(this,R.drawable.flashlightoff)).into(img_flashlight)
         }
     }
 
