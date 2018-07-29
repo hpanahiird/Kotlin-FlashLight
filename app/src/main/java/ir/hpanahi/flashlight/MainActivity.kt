@@ -2,6 +2,7 @@ package ir.hpanahi.flashlight
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.SurfaceTexture
 import android.hardware.Camera
 import android.os.Build
 import android.os.Bundle
@@ -83,6 +84,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun turnOnFlashlight() {
         parameters!!.flashMode= Camera.Parameters.FLASH_MODE_TORCH
+        val mDummy = SurfaceTexture(1) // any int argument will do
+        camera!!.setPreviewTexture(mDummy)
         camera!!.parameters = parameters
         camera!!.startPreview()
         isON = true
