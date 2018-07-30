@@ -4,20 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#000000">
 
     <!--<Button-->
-        <!--android:id="@+id/btn_power_switch"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/switch_on"-->
-        <!--android:layout_centerInParent="true"/>-->
+    <!--android:id="@+id/btn_power_switch"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="@string/switch_on"-->
+    <!--android:layout_centerInParent="true"/>-->
     <ImageView
-        android:id="@+id/img_flashlight"
-        android:layout_width="100dp"
-        android:layout_height="362dp"
-        android:src="@drawable/flashlightoff"
+        android:id="@+id/img_light"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/container"
+        android:src="@drawable/shape_light"
+        android:scaleType="fitXY"
+        />
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"/>
+        android:orientation="horizontal">
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/img_flashlight"
+            android:layout_width="match_parent"
+            android:layout_height="362dp"
+            android:src="@drawable/flashlightoff"
+            android:layout_weight="1"/>
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
 </RelativeLayout>
