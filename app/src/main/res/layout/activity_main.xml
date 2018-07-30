@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/container"
-        android:src="@drawable/shape_light"
+        app:srcCompat="@drawable/shape_light"
         android:scaleType="fitXY"
         />
     <LinearLayout
