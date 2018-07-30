@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btn_power_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/switch_on"
-        android:layout_centerInParent="true"/>
+    <!--<Button-->
+        <!--android:id="@+id/btn_power_switch"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/switch_on"-->
+        <!--android:layout_centerInParent="true"/>-->
     <ImageView
         android:id="@+id/img_flashlight"
         android:layout_width="100dp"

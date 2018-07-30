@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         hasFlash = checkForFlash()
         if (hasFlash) {
             setupPermission()
-            btn_power_switch.setOnClickListener({
+            img_flashlight.setOnClickListener({
                 Log.d("nvjfnf", "lkfmgnf")
                 if (isON)
                     turnOfFlashlight()
@@ -95,8 +95,11 @@ class MainActivity : AppCompatActivity() {
             camera!!.parameters = parameters
             camera!!.startPreview()
             isON = true
-            btn_power_switch.text = getString(R.string.switch_off)
-            Glide.with(this).load(ContextCompat.getDrawable(this,R.drawable.flashlighton)).apply(RequestOptions().placeholder(img_flashlight.drawable)).into(img_flashlight)
+//            btn_power_switch.text = getString(R.string.switch_off)
+            Glide.with(this)
+                    .load(ContextCompat.getDrawable(this,R.drawable.flashlighton))
+                    .apply(RequestOptions().placeholder(img_flashlight.drawable))
+                    .into(img_flashlight)
         }
     }
 
@@ -106,13 +109,23 @@ class MainActivity : AppCompatActivity() {
             camera!!.parameters = parameters
             camera!!.stopPreview()
             isON = false
-            btn_power_switch.text = getString(R.string.switch_on)
-            Glide.with(this).load(ContextCompat.getDrawable(this,R.drawable.flashlightoff)).apply(RequestOptions().placeholder(img_flashlight.drawable)).into(img_flashlight)
+//            btn_power_switch.text = getString(R.string.switch_on)
+            Glide.with(this)
+                    .load(ContextCompat.getDrawable(this,R.drawable.flashlightoff))
+                    .apply(RequestOptions().placeholder(img_flashlight.drawable))
+                    .into(img_flashlight)
+
+
         }
     }
 
     private fun setViews() {
-        btn_power_switch.text = getString(R.string.switch_on)
+//        btn_power_switch.text = getString(R.string.switch_on)
+        Glide.with(this)
+                .load(ContextCompat.getDrawable(this,R.drawable.flashlightoff))
+                .apply(RequestOptions().placeholder(img_flashlight.drawable))
+                .into(img_flashlight)
+
     }
 
     override fun onDestroy() {
